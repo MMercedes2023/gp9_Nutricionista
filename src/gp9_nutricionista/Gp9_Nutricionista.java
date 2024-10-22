@@ -1,5 +1,9 @@
 package gp9_nutricionista;
+
 import java.sql.Connection;
+import nutricionista_persistencia.Conexion;
+
+
 public class Gp9_Nutricionista {
 
     /**
