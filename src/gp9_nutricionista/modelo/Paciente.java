@@ -16,6 +16,9 @@ public class Paciente {
     private float pesoActual;
     private float pesoBuscado;
 
+    public Paciente() {
+    }
+
     public Paciente(int nroPaciente, String nombre, int edad, float altura, float pesoActual, float pesoBuscado) {
         this.nroPaciente = nroPaciente;
         this.nombre = nombre;

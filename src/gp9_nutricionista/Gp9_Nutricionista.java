@@ -20,9 +20,13 @@ public class Gp9_Nutricionista {
        
        
        //.agregarPaciente(p1);
-       pD.modificarPaciente(P2);
-       
-       
+       //pD.modificarPaciente(P2);
+        //System.out.println(pD.buscarPaciente(1));
+        
+        for (Paciente p : pD.listarPacientes()) {
+            System.out.println(p);
+        }
+       //pD.borrarPaciente(1);
     }
     
 }

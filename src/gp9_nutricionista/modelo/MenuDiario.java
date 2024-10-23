@@ -18,6 +18,9 @@ public class MenuDiario {
     private boolean estado;
     private Dieta dieta;
 
+    public MenuDiario() {
+    }
+
     public MenuDiario(int codMenu, int diaNro, List<RenglonDeMenu> comidas, boolean estado, Dieta dieta) {
         this.codMenu = codMenu;
         this.diaNro = diaNro;

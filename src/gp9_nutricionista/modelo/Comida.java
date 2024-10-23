@@ -18,6 +18,9 @@ public class Comida {
     private  String detalle;
     private boolean baja;
 
+    public Comida() {
+    }
+
     public Comida(int conComida, String nombre, String tipoComida, int caloriasPor100g, String detalle, boolean baja) {
         this.conComida = conComida;
         this.nombre = nombre;
