@@ -5,6 +5,7 @@
 package gp9_nutricionista.modelo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +25,18 @@ public class Dieta {
     private Paciente paciente;
 
     public Dieta() {
+    }
+
+    public Dieta(String nombreD, LocalDate fechaIni, LocalDate fechaFin, float pesoFinal, boolean estado, int totalCalorias, Paciente paciente) {
+        this.nombreD = nombreD;
+        this.fechaIni = fechaIni;
+        this.fechaFin = fechaFin;
+        this.pesoFinal = pesoFinal;
+        this.estado = estado;
+        this.totalCalorias = totalCalorias;
+        this.paciente = paciente;
+        this.menus = new ArrayList<>();
+        
     }
 
     public Dieta(int codDieta, String nombreD, List<MenuDiario> menus, LocalDate fechaIni, LocalDate fechaFin, float pesoFinal, boolean estado, int totalCalorias, Paciente paciente) {
@@ -48,7 +61,7 @@ public class Dieta {
         this.totalCalorias = totalCalorias;
         this.paciente = paciente;
     }
-
+    
     public int getCodDieta() {
         return codDieta;
     }
@@ -121,6 +134,15 @@ public class Dieta {
         this.paciente = paciente;
     }
 
+    
+    public void agregarMenus(MenuDiario menu){
+    menus.add(menu);
+    
+    
+    
+    }
+    
+    
     @Override
     public String toString() {
         return "Dieta{" + "codDieta=" + codDieta + ", nombreD=" + nombreD + ", menus=" + menus + ", fechaIni=" + fechaIni + ", fechaFin=" + fechaFin + ", pesoFinal=" + pesoFinal + ", estado=" + estado + ", totalCalorias=" + totalCalorias + ", paciente=" + paciente + '}';

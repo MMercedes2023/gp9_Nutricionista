@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class DietaData {
     
     private Connection con=null;
+    private PacienteData pD = new PacienteData();
     
 
 public DietaData(){
@@ -32,12 +33,12 @@ String sql= "INSERT INTO dieta (nombreD,fechaInicio,fechaFin,pesoFinal,estado,to
     ps.setFloat(4,dieta.getPesoFinal());
     ps.setBoolean(5,dieta.isEstado());
     ps.setInt(6, dieta.getTotalCalorias());
-    ps.setInt(7, dieta.getPaciente());
+    ps.setInt(7, dieta.getPaciente().getNroPaciente());
     
     ps.executeUpdate();
     ResultSet rs= ps.getGeneratedKeys();
     if(rs.next()){
-    dieta.setCodDieta(rs.getInt("codDieta"));
+    
     
     JOptionPane.showMessageDialog(null," Su dieta se guardo correctamente ");
     
@@ -70,7 +71,7 @@ String sql= "INSERT INTO dieta (nombreD,fechaInicio,fechaFin,pesoFinal,estado,to
                 dieta.setFechaFin(rs.getDate("fechaFin").toLocalDate());
                 dieta.setPesoFinal(rs.getFloat("pesoFinal"));
                 dieta.setTotalCalorias(rs.getInt("totalCalorias"));
-                dieta.setPaciente(rs.getObject("nroPaciente"));
+                dieta.setPaciente(pD.buscarPaciente(rs.getInt("nroPaciente")));
                 dieta.setEstado(true);
             }else{
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
@@ -99,7 +100,8 @@ public void modificarDieta(Dieta dieta){
     ps.setDate(3,Date.valueOf(dieta.getFechaFin()));
     ps.setFloat(4,dieta.getPesoFinal());
     ps.setFloat(5, dieta.getTotalCalorias());
-    ps.setInt(6, dieta.getPaciente());
+    ps.setInt(6, dieta.getPaciente().getNroPaciente());
+    ps.setInt(7, dieta.getCodDieta());
     int exito=ps.executeUpdate();
     
     if(exito==1){
