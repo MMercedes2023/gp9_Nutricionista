@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 public class ComidaData {
 
     private Connection con = null;
-    private ComidaData cD = new ComidaData();
-    Comida c = new Comida();
+    
+    
 
     public ComidaData() {
         con = Conexion.getConexion();
@@ -41,16 +41,17 @@ public class ComidaData {
 
     
 
-    public void modificarAlimento() {
-        String sql = "UPDATE comida SET nombre = ?, caloriasPor100g = ?, tipoComida = ?, detalle = ? WHERE codComida = ?";
+    public void modificarAlimento(Comida comida) {
+        String sql = "UPDATE comida SET nombre = ?, caloriasPor100g = ?, tipoComida = ?, detalle = ?, baja=? WHERE codComida = ?";
        
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, c.getNombre());
-            ps.setInt(2, c.getCaloriasPor100g());
-            ps.setString(3, c.getTipoComida());
-            ps.setString(4, c.getDetalle());
-            ps.setInt(5, c.getConComida());
+            ps.setString(1, comida.getNombre());
+            ps.setInt(2, comida.getCaloriasPor100g());
+            ps.setString(3, comida.getTipoComida());
+            ps.setString(4, comida.getDetalle());
+            ps.setBoolean(5, comida.isBaja());
+            ps.setInt(6, comida.getConComida());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -60,5 +61,129 @@ public class ComidaData {
             JOptionPane.showMessageDialog(null, "Error al acceder al alimento:  " + ex.getMessage());
         }
     }
+    
+    
+    public void guardarComida(Comida comida){
+     
+        String sql = "INSERT INTO comida (nombre, tipoComida, caloriasPor100g, detalle, baja) VALUES(?,?,?,?,?)";
+        
+        try {
+          PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+          ps.setString(1, comida.getNombre());
+          ps.setString(2, comida.getTipoComida());
+          ps.setInt(3, comida.getCaloriasPor100g());
+          ps.setString(4, comida.getDetalle());
+          ps.setBoolean(5, comida.isBaja());
+          
+           ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                comida.setConComida(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Comida añadida con éxito");
+            }
+            ps.close();
+          
+          
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar comida");
+            
+            
+        }
+    
+    }
+    
+    public ArrayList<Comida> listarComidas(){
+    ArrayList<Comida> listComidas = new ArrayList<>();
+    String sql = "SELECT * FROM comida";
+    try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Comida comida = new Comida();
+                comida.setDetalle(rs.getString("detalle"));
+                comida.setNombre(rs.getString("nombre"));
+                comida.setCaloriasPor100g(rs.getInt("caloriasPor100g"));
+                comida.setBaja(rs.getBoolean("baja"));
+                comida.setTipoComida(rs.getString("tipoComida"));
+                comida.setConComida(rs.getInt("codComida"));
+               listComidas.add(comida);
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al mostrar la lista");
+
+        }
+    
+    
+        return listComidas;
+    
+    }
+    
+    
+    
+    
+    
+    public Comida buscarComida(int id){
+    Comida comida = new Comida();
+        String sql = "SELECT * FROM comida WHERE codComida=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                comida.setConComida(id);
+                comida.setDetalle(rs.getString("detalle"));
+                comida.setCaloriasPor100g(rs.getInt("caloriasPor100g"));
+                comida.setBaja(rs.getBoolean("baja"));
+                comida.setNombre(rs.getString("nombre"));
+                comida.setTipoComida(rs.getString("tipoComida"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro comida");
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al buscar comida");
+        }
+
+        return comida;
+    
+    
+    
+    
+    
+    }
+    
+    public void borrarComida(int id) {
+    String sql = "UPDATE comida SET baja=0 WHERE codComida=?";
+    
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        
+        int x = ps.executeUpdate();
+        
+        if (x == 1) {
+            JOptionPane.showMessageDialog(null, "Comida eliminada");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontro la comida ");
+        }
+        
+        ps.close();
+    } catch (SQLException ex) {
+       
+        JOptionPane.showMessageDialog(null, "Error al intentar eliminar la comida" + ex.getMessage());
+    }
+}
+    
+    
+    
+    
+    
 }
 
