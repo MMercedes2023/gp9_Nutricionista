@@ -12,52 +12,67 @@ import javax.swing.JOptionPane;
 public class RenglonDeMenuData {
 
     private Connection con = null;
-    private RenglonDeMenuData rDMD = new RenglonDeMenuData();
-    RenglonDeMenu rdm = new RenglonDeMenu();
-    Comida c = new Comida();
+    
+    
+  
 
     public RenglonDeMenuData() {
         con = Conexion.getConexion();
     }
 
-    public void insertarRenglon() {
-        String sql = "INSERT INTO renglondemenu (nroRenglon, codComida, cantidadGrs, subtotalCalorias) VALUES (?, ?, ?, ?, ?)";
-        calcularSubtotalCalorias();
-
+    public void insertarRenglon(RenglonDeMenu rdm) {
+        String sql = "INSERT INTO renglondemenu (codComida, cantidadGrs, subtotalCalorias) VALUES (?, ?, ?)";
+//        calcularSubtotalCalorias();
+        Comida c =  rdm.getAlimento();
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, rdm.getNroRenglon());
-            ps.setInt(2, c.getConComida());
-            ps.setDouble(4, rdm.getCantidadGrs());
-            ps.setInt(5, rdm.getSubtotalCalorias());
-            JOptionPane.showMessageDialog(null, "Se ingreso el renglon");
+         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+          
+            ps.setInt(1, c.getConComida());
+            ps.setDouble(2, rdm.getCantidadGrs());
+            ps.setInt(3, rdm.getSubtotalCalorias());
+             ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                rdm.setNroRenglon(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Renglon  añadido con éxito");
+            }
+            ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al ingresar renglon: " + e.getMessage());
         }
     }
 
-    public void actualizarRenglon() {
-        String sql = "UPDATE renglondemenu SET codComida = ?, cantidadGrs = ?, subtotalCalorias = ? WHERE nroRenglon = ? AND codMenu = ?";
-        calcularSubtotalCalorias();
+   public void actualizarRenglon(RenglonDeMenu rdm, int id) {
+    String sql = "UPDATE renglondemenu SET codComida = ?, cantidadGrs = ?, subtotalCalorias = ? WHERE nroRenglon = ? AND codMenu = ?";
+    Comida c = rdm.getAlimento();
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, c.getConComida());
-            ps.setDouble(2, rdm.getCantidadGrs());
-            ps.setInt(3, rdm.getSubtotalCalorias());
-            ps.setInt(4, rdm.getNroRenglon());
-            JOptionPane.showMessageDialog(null, "Se actualizo el renglon");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar renglon: " + e.getMessage());
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, c.getConComida());
+        ps.setDouble(2, rdm.getCantidadGrs());
+        ps.setInt(3, rdm.getSubtotalCalorias());
+        ps.setInt(4, rdm.getNroRenglon());
+        ps.setInt(5, id);
+
+        int rowsAffected = ps.executeUpdate();
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Se actualizó el renglón con éxito.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el renglón para actualizar.");
         }
+        ps.close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar renglón: " + e.getMessage());
     }
+}
 
-    public void eliminarRenglon() {
+
+    public void eliminarRenglon(int id) {
         String sql = "DELETE FROM RenglonDeMenu WHERE nroRenglon = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, rdm.getNroRenglon());
+            ps.setInt(1, id);
             JOptionPane.showMessageDialog(null, "Se elimino el renglon");
 
         } catch (SQLException e) {
@@ -65,8 +80,8 @@ public class RenglonDeMenuData {
         }
     }
 
-    private void calcularSubtotalCalorias() {
-        double x = (c.getCaloriasPor100g() * rdm.getCantidadGrs()) / 100;
-        rdm.setSubtotalCalorias((int) x);
-    }
+//    private void calcularSubtotalCalorias() {
+//        double x = (c.getCaloriasPor100g() * rdm.getCantidadGrs()) / 100;
+//        rdm.setSubtotalCalorias((int) x);
+//    }
 }

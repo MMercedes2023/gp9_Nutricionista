@@ -27,6 +27,18 @@ public class Dieta {
     public Dieta() {
     }
 
+    public Dieta(int codDieta, String nombreD, LocalDate fechaIni, LocalDate fechaFin, float pesoFinal, boolean estado, int totalCalorias, Paciente paciente) {
+        this.codDieta = codDieta;
+        this.nombreD = nombreD;
+        this.fechaIni = fechaIni;
+        this.fechaFin = fechaFin;
+        this.pesoFinal = pesoFinal;
+        this.estado = estado;
+        this.totalCalorias = totalCalorias;
+        this.paciente = paciente;
+        this.menus = new ArrayList<>();
+    }
+
     public Dieta(String nombreD, LocalDate fechaIni, LocalDate fechaFin, float pesoFinal, boolean estado, int totalCalorias, Paciente paciente) {
         this.nombreD = nombreD;
         this.fechaIni = fechaIni;
