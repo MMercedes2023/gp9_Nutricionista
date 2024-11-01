@@ -51,12 +51,15 @@ public class Paciente extends javax.swing.JInternalFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotransversal_gp9/imagenes/alumno1.png")));
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        setClosable(true);
+        setIconifiable(true);
+
+        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Paciente");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 100, 25));
+        jLabel1.setText("PACIENTE");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 130, 25));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("id:");
@@ -66,6 +69,7 @@ public class Paciente extends javax.swing.JInternalFrame {
         jLabel3.setText("Edad:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
+        jTId.setBackground(new java.awt.Color(204, 204, 204));
         jTId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTIdKeyTyped(evt);
@@ -77,6 +81,7 @@ public class Paciente extends javax.swing.JInternalFrame {
         jLabel4.setText("Nombre:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 20));
 
+        jTEdad.setBackground(new java.awt.Color(204, 204, 204));
         jTEdad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTEdadKeyTyped(evt);
@@ -86,7 +91,7 @@ public class Paciente extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Estado:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setText("Altura:");
@@ -114,16 +119,21 @@ public class Paciente extends javax.swing.JInternalFrame {
                 jBBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(jBBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
+        jPanel1.add(jBBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
 
+        jTEstado.setBackground(new java.awt.Color(204, 204, 204));
+        jTEstado.setForeground(new java.awt.Color(0, 51, 51));
         jTEstado.setText("Activo");
+        jTEstado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTEstado.setBorderPainted(true);
         jTEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTEstadoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
+        jPanel1.add(jTEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, -1, -1));
 
+        jTNombre.setBackground(new java.awt.Color(204, 204, 204));
         jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTNombreKeyTyped(evt);
@@ -154,25 +164,29 @@ public class Paciente extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setText("Peso Deseado:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
+
+        jTAltura.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.add(jTAltura, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 140, -1));
+
+        jTPesoA.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.add(jTPesoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 140, -1));
+
+        jTPesoD.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.add(jTPesoD, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 581, Short.MAX_VALUE)
+            .addGap(0, 566, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
+            .addGap(0, 397, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE))
         );
 
         pack();
