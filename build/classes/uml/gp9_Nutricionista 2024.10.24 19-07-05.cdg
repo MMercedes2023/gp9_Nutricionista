@@ -181,7 +181,7 @@
         <Method name="toString" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Paciente" package="gp9_nutricionista.modelo" visibility="public" xPosition="-259.0" yPosition="20.0">
+    <Class name="Paciente" package="gp9_nutricionista.modelo" visibility="public" xPosition="-285.0" yPosition="84.0">
       <Fields>
         <Field name="nroPaciente" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -279,15 +279,15 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
+    <UseRelation source="gp9_nutricionista.modelo.MenuDiario" target="gp9_nutricionista.modelo.RenglonDeMenu" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="menus" source="gp9_nutricionista.modelo.Dieta" target="gp9_nutricionista.modelo.MenuDiario" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;MenuDiario&gt;"/>
     <HasRelation name="dieta" source="gp9_nutricionista.modelo.MenuDiario" target="gp9_nutricionista.modelo.Dieta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="comidas" source="gp9_nutricionista.modelo.MenuDiario" target="gp9_nutricionista.modelo.RenglonDeMenu" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;RenglonDeMenu&gt;"/>
-    <UseRelation source="gp9_nutricionista.modelo.Dieta" target="gp9_nutricionista.modelo.MenuDiario" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="menus" source="gp9_nutricionista.modelo.Dieta" target="gp9_nutricionista.modelo.MenuDiario" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;MenuDiario&gt;"/>
     <HasRelation name="paciente" source="gp9_nutricionista.modelo.Dieta" target="gp9_nutricionista.modelo.Paciente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="gp9_nutricionista.modelo.MenuDiario" target="gp9_nutricionista.modelo.RenglonDeMenu" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="alimento" source="gp9_nutricionista.modelo.RenglonDeMenu" target="gp9_nutricionista.modelo.Comida" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="gp9_nutricionista.modelo.MenuDiario" target="gp9_nutricionista.modelo.Dieta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="gp9_nutricionista.modelo.Dieta" target="gp9_nutricionista.modelo.MenuDiario" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="gp9_nutricionista.modelo.Dieta" target="gp9_nutricionista.modelo.Paciente" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="gp9_nutricionista.modelo.RenglonDeMenu" target="gp9_nutricionista.modelo.Comida" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="gp9_nutricionista.modelo.MenuDiario" target="gp9_nutricionista.modelo.Dieta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="alimento" source="gp9_nutricionista.modelo.RenglonDeMenu" target="gp9_nutricionista.modelo.Comida" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
