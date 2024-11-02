@@ -1,19 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package gp9_nutricionista.vistas;
+
+import nutricionista_persistencia.PacienteData;
+import gp9_nutricionista.modelo.*;
 
 /**
  *
  * @author agust
  */
-public class Paciente extends javax.swing.JInternalFrame {
+public class PacienteVista extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Paciente
-     */
-    public Paciente() {
+    private PacienteData pacd = new PacienteData();
+    private boolean activo = false;
+
+    public PacienteVista() {
         initComponents();
     }
 
@@ -193,40 +192,57 @@ public class Paciente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTIdKeyTyped
-      
+
     }//GEN-LAST:event_jTIdKeyTyped
 
     private void jTEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTEdadKeyTyped
-       
+
     }//GEN-LAST:event_jTEdadKeyTyped
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-      
+        int id = Integer.parseInt(jTId.getText());
+        pacd.borrarPaciente(id);
+
+        limpiarFormulario();
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-       
+        Paciente p = new Paciente();
+        int cod = Integer.parseInt(jTId.getText());
+        String nombre = jTNombre.getText();
+        int e = Integer.parseInt(jTEdad.getText());
+        float a = Float.parseFloat(jTAltura.getText());
+        float pa = Float.parseFloat(jTPesoA.getText());
+        float pd = Float.parseFloat(jTPesoD.getText());
+
+        p.setNroPaciente(cod);
+        p.setNombre(nombre);
+        p.setEdad(e);
+        p.setAltura(a);
+        p.setPesoActual(pa);
+        p.setPesoBuscado(pd);
+
+        pacd.agregarPaciente(p);
+        limpiarFormulario();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
 
-     
 
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jTEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTEstadoActionPerformed
-        // TODO add your handling code here:
-       
+        activo=true;
+
     }//GEN-LAST:event_jTEstadoActionPerformed
 
     private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
-        
+
     }//GEN-LAST:event_jTNombreKeyTyped
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
-        // TODO add your handling code here:
-        
+        limpiarFormulario();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificar1ActionPerformed
@@ -258,4 +274,15 @@ public class Paciente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTPesoA;
     private javax.swing.JTextField jTPesoD;
     // End of variables declaration//GEN-END:variables
+
+    public void limpiarFormulario() {
+        jTId.setText("");
+        jTNombre.setText("");
+        jTAltura.setText("");
+        jTEdad.setText("");
+        jTPesoA.setText("");
+        jTPesoD.setText("");
+        jTEstado.setSelected(false);
+        jTEstado.setEnabled(true);
+    }
 }

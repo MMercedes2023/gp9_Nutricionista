@@ -4,16 +4,18 @@
  */
 package gp9_nutricionista.vistas;
 
+import nutricionista_persistencia.DietaData;
+
 /**
  *
  * @author ACER
  */
-public class Dieta extends javax.swing.JInternalFrame {
+public class DietaVista extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Dieta
-     */
-    public Dieta() {
+    private DietaData diet = new DietaData();
+    private boolean activo=false;
+    
+    public DietaVista() {
         initComponents();
     }
 
@@ -41,9 +43,9 @@ public class Dieta extends javax.swing.JInternalFrame {
         jft_fechaFinal = new javax.swing.JFormattedTextField();
         jtf_pesoFinal = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jTEstado = new javax.swing.JRadioButton();
         jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        jBGuardar = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jToggleButton4 = new javax.swing.JToggleButton();
 
@@ -102,17 +104,32 @@ public class Dieta extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setText("Estado:");
 
-        jRadioButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jRadioButton1.setForeground(new java.awt.Color(0, 51, 51));
-        jRadioButton1.setText("Activo");
+        jTEstado.setBackground(new java.awt.Color(204, 204, 204));
+        jTEstado.setForeground(new java.awt.Color(0, 51, 51));
+        jTEstado.setText("Activo");
 
         jToggleButton1.setText("Eliminar");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
-        jToggleButton2.setText("Crear");
+        jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jToggleButton3.setText("Modificar");
 
         jToggleButton4.setText("Limpiar");
+        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -139,7 +156,7 @@ public class Dieta extends javax.swing.JInternalFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -163,7 +180,7 @@ public class Dieta extends javax.swing.JInternalFrame {
                         .addGap(220, 220, 220)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton1))
+                        .addComponent(jTEstado))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(255, 255, 255)
                         .addComponent(jLabel1)))
@@ -195,11 +212,11 @@ public class Dieta extends javax.swing.JInternalFrame {
                 .addGap(51, 51, 51)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8)
-                    .addComponent(jRadioButton1))
+                    .addComponent(jTEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2)
+                    .addComponent(jBGuardar)
                     .addComponent(jToggleButton3)
                     .addComponent(jToggleButton4))
                 .addGap(37, 37, 37))
@@ -227,8 +244,24 @@ public class Dieta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }                                      
 
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        
+    }                                         
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        limpiarFormulario();
+    }                                              
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        int id = Integer.parseInt(jtf_id.getText());
+        diet.eliminarDieta(id);
+
+        limpiarFormulario();
+    }                                              
+
 
     // Variables declaration - do not modify                     
+    private javax.swing.JToggleButton jBGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -238,9 +271,8 @@ public class Dieta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jTEstado;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JComboBox<String> jcb_menus;
@@ -250,4 +282,14 @@ public class Dieta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtf_nombre;
     private javax.swing.JTextField jtf_pesoFinal;
     // End of variables declaration                   
+
+    public void limpiarFormulario() {
+        jtf_id.setText("");
+        jtf_nombre.setText("");
+        jtf_pesoFinal.setText("");
+        jft_fechaInicio.setText("");
+        jft_fechaFinal.setText("");
+        jTEstado.setSelected(false);
+        jTEstado.setEnabled(true);
+    }
 }
