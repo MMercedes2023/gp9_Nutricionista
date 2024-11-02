@@ -38,6 +38,12 @@ public class Comida {
         this.baja = baja;
     }
 
+    public Comida(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
+
     public int getConComida() {
         return conComida;
     }
