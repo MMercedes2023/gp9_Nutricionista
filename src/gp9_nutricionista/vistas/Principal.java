@@ -15,6 +15,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -28,8 +29,10 @@ public class Principal extends javax.swing.JFrame {
 
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        escritorio = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_paciente = new javax.swing.JMenu();
         jm_dieta = new javax.swing.JMenu();
@@ -42,35 +45,46 @@ public class Principal extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 51));
 
-        jTextField1.setBackground(new java.awt.Color(0, 51, 51));
-        jTextField1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jTextField1.setText("PANEL DE CONTROL NUTRICIONISTA");
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gp9_nutricionista/vistas/Recursos.jpeg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(295, 295, 295)
+                .addComponent(jLabel1)
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGap(88, 88, 88)
+                .addComponent(jLabel1)
+                .addContainerGap(490, Short.MAX_VALUE))
+        );
+
+        escritorio.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
@@ -86,10 +100,20 @@ public class Principal extends javax.swing.JFrame {
 
         jm_dieta.setBackground(new java.awt.Color(0, 102, 102));
         jm_dieta.setText("Dietas");
+        jm_dieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_dietaActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jm_dieta);
 
         jm_menu.setBackground(new java.awt.Color(0, 102, 102));
         jm_menu.setText("Menus");
+        jm_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_menuActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jm_menu);
 
         setJMenuBar(jMenuBar1);
@@ -98,11 +122,13 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(escritorio)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
 
         pack();
@@ -110,11 +136,39 @@ public class Principal extends javax.swing.JFrame {
 
     private void jm_pacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_pacienteActionPerformed
         // TODO add your handling code here:
+         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        fondoMenu();
+         PacienteVista pv= new PacienteVista();
+        pv.setVisible(true);
+        escritorio.add(pv);
+        escritorio.moveToFront(pv);
     }//GEN-LAST:event_jm_pacienteActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jm_dietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_dietaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        fondoMenu();
+        DietaVista dv = new DietaVista();
+        dv.setVisible(true);
+        escritorio.add(dv);
+        escritorio.moveToFront(dv);
+    }//GEN-LAST:event_jm_dietaActionPerformed
+
+    private void jm_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_menuActionPerformed
+        // TODO add your handling code here:
+         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        fondoMenu();
+        MenuDiarioVista mv = new MenuDiarioVista();
+        mv.setVisible(true);
+        escritorio.add(mv);
+        escritorio.moveToFront(mv);
+    }//GEN-LAST:event_jm_menuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,13 +207,32 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu jm_dieta;
     private javax.swing.JMenu jm_menu;
     private javax.swing.JMenu jm_paciente;
     // End of variables declaration//GEN-END:variables
+private void fondoMenu() {
+        jPanel2 = new javax.swing.JPanel();
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
+        escritorio.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+                escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+                escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+    }
 }
