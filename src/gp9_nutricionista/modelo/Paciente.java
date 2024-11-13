@@ -15,10 +15,31 @@ public class Paciente {
     private float altura;
     private float pesoActual;
     private float pesoBuscado;
+    private boolean estado;
 
     public Paciente() {
     }
 
+    public Paciente(int nroPaciente, String nombre, int edad, float altura, float pesoActual, float pesoBuscado, boolean estado) {
+        this.nroPaciente = nroPaciente;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.altura = altura;
+        this.pesoActual = pesoActual;
+        this.pesoBuscado = pesoBuscado;
+        this.estado = estado;
+    }
+
+    public Paciente(String nombre, int edad, float altura, float pesoActual, float pesoBuscado, boolean estado) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.altura = altura;
+        this.pesoActual = pesoActual;
+        this.pesoBuscado = pesoBuscado;
+        this.estado = estado;
+    }
+
+    
     public Paciente(int nroPaciente, String nombre, int edad, float altura, float pesoActual, float pesoBuscado) {
         this.nroPaciente = nroPaciente;
         this.nombre = nombre;
@@ -34,6 +55,14 @@ public class Paciente {
         this.altura = altura;
         this.pesoActual = pesoActual;
         this.pesoBuscado = pesoBuscado;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public int getNroPaciente() {

@@ -28,7 +28,7 @@ public class PacienteData {
     
     public void agregarPaciente(Paciente paciente){
     
-    String sql = "INSERT INTO paciente (nombre, edad, altura, pesoActual, pesoBuscado)"+ " VALUES(?,?,?,?,?)";
+    String sql = "INSERT INTO paciente (nombre, edad, altura, pesoActual, pesoBuscado, estado)"+ " VALUES(?,?,?,?,?,?)";
     
     try{
     PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -37,6 +37,7 @@ public class PacienteData {
     ps.setFloat(3, paciente.getAltura());
     ps.setFloat(4, paciente.getPesoActual());
     ps.setFloat(5, paciente.getPesoBuscado());
+    ps.setBoolean(6, paciente.isEstado());
     ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -56,7 +57,7 @@ public class PacienteData {
     
     public void agregarPacienteId(Paciente paciente){
     
-    String sql = "INSERT INTO paciente (nroPaciente, nombre, edad, altura, pesoActual, pesoBuscado)"+ " VALUES(?,?,?,?,?,?)";
+    String sql = "INSERT INTO paciente (nroPaciente, nombre, edad, altura, pesoActual, pesoBuscado, estado)"+ " VALUES(?,?,?,?,?,?,?)";
     
     try{
     PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -66,6 +67,7 @@ public class PacienteData {
     ps.setFloat(4, paciente.getAltura());
     ps.setFloat(5, paciente.getPesoActual());
     ps.setFloat(6, paciente.getPesoBuscado());
+    ps.setBoolean(7, paciente.isEstado());
     ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -84,7 +86,7 @@ public class PacienteData {
     
      public void modificarPaciente(Paciente paciente){
         
-    String sql="UPDATE paciente SET nombre=?,edad=?,altura=?,pesoActual=?, pesoBuscado=? WHERE nroPaciente=?";
+    String sql="UPDATE paciente SET nombre=?,edad=?,altura=?,pesoActual=?, pesoBuscado=?, estado=? WHERE nroPaciente=?";
     
   
     
@@ -96,7 +98,9 @@ public class PacienteData {
            ps.setFloat(3, paciente.getAltura());
            ps.setFloat(4, paciente.getPesoActual());
            ps.setFloat(5, paciente.getPesoBuscado());
-           ps.setInt(6, paciente.getNroPaciente());
+           ps.setBoolean(6, paciente.isEstado());
+           ps.setInt(7, paciente.getNroPaciente());
+           
             int x = ps.executeUpdate();
 
             if (x == 1) {
@@ -127,6 +131,7 @@ public class PacienteData {
                 paciente.setNombre(rs.getString("nombre"));
                 paciente.setPesoActual(rs.getFloat("pesoActual"));
                 paciente.setPesoBuscado(rs.getFloat("pesoBuscado"));
+                paciente.setEstado(rs.getBoolean("estado"));
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontro al paciente");
             }
@@ -156,6 +161,7 @@ public class PacienteData {
                 paciente.setNombre(rs.getString("nombre"));
                 paciente.setPesoActual(rs.getFloat("pesoActual"));
                 paciente.setPesoBuscado(rs.getFloat("pesoBuscado"));
+                paciente.setEstado(rs.getBoolean("estado"));
                 pacientes.add(paciente);
 
             }

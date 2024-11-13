@@ -198,9 +198,12 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTEdadKeyTyped
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        
+        if(!jTId.getText().isEmpty()){
         int id = Integer.parseInt(jTId.getText());
+        
         pacd.borrarPaciente(id);
-
+        }
         limpiarFormulario();
     }//GEN-LAST:event_jBEliminarActionPerformed
 
@@ -214,13 +217,14 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         float a = Float.parseFloat(jTAltura.getText());
         float pa = Float.parseFloat(jTPesoA.getText());
         float pd = Float.parseFloat(jTPesoD.getText());
-
+        boolean bo = jTEstado.isSelected();
        
         p.setNombre(nombre);
         p.setEdad(e);
         p.setAltura(a);
         p.setPesoActual(pa);
         p.setPesoBuscado(pd);
+        p.setEstado(bo);
         
         if (!jTId.getText().isEmpty()) {
                 int cod = Integer.parseInt(jTId.getText());
@@ -237,8 +241,25 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        // TODO add your handling code here:
-
+       try{
+         int id = Integer.parseInt(jTId.getText());
+        Paciente p = new Paciente();
+         p = pacd.buscarPaciente(id);
+        
+        jTNombre.setText(p.getNombre());
+        jTEdad.setText(p.getEdad()+"");
+        jTEstado.setSelected(p.isEstado());
+        jTAltura.setText(p.getAltura()+"");
+        jTPesoA.setText(p.getPesoActual()+"");
+        jTPesoD.setText(p.getPesoBuscado()+"");
+        
+        
+       
+        
+    }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un id para poder buscar al paciente");
+      limpiarFormulario();
+    }
 
     }//GEN-LAST:event_jBBuscarActionPerformed
 
