@@ -53,6 +53,35 @@ public class PacienteData {
     }
     }
     
+    
+    public void agregarPacienteId(Paciente paciente){
+    
+    String sql = "INSERT INTO paciente (nroPaciente, nombre, edad, altura, pesoActual, pesoBuscado)"+ " VALUES(?,?,?,?,?,?)";
+    
+    try{
+    PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+    ps.setInt(1, paciente.getNroPaciente());
+    ps.setString(2, paciente.getNombre());
+    ps.setInt(3, paciente.getEdad());
+    ps.setFloat(4, paciente.getAltura());
+    ps.setFloat(5, paciente.getPesoActual());
+    ps.setFloat(6, paciente.getPesoBuscado());
+    ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                paciente.setNroPaciente(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Paciente añadido con éxito");
+            }
+            ps.close();
+    
+    
+    
+    }catch(SQLException ex){
+    JOptionPane.showMessageDialog(null, "Error al guardar el paciente");
+    
+    }
+    }
+    
      public void modificarPaciente(Paciente paciente){
         
     String sql="UPDATE paciente SET nombre=?,edad=?,altura=?,pesoActual=?, pesoBuscado=? WHERE nroPaciente=?";

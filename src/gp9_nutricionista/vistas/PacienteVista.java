@@ -2,6 +2,7 @@ package gp9_nutricionista.vistas;
 
 import nutricionista_persistencia.PacienteData;
 import gp9_nutricionista.modelo.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +26,6 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -48,12 +48,10 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         jTPesoA = new javax.swing.JTextField();
         jTPesoD = new javax.swing.JTextField();
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotransversal_gp9/imagenes/alumno1.png")));
-
         setClosable(true);
         setIconifiable(true);
 
-        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -207,23 +205,35 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        
+        try{
         Paciente p = new Paciente();
-        int cod = Integer.parseInt(jTId.getText());
+        
         String nombre = jTNombre.getText();
         int e = Integer.parseInt(jTEdad.getText());
         float a = Float.parseFloat(jTAltura.getText());
         float pa = Float.parseFloat(jTPesoA.getText());
         float pd = Float.parseFloat(jTPesoD.getText());
 
-        p.setNroPaciente(cod);
+       
         p.setNombre(nombre);
         p.setEdad(e);
         p.setAltura(a);
         p.setPesoActual(pa);
         p.setPesoBuscado(pd);
-
-        pacd.agregarPaciente(p);
+        
+        if (!jTId.getText().isEmpty()) {
+                int cod = Integer.parseInt(jTId.getText());
+                p.setNroPaciente(cod);
+               pacd.agregarPacienteId(p);
+        }else{pacd.agregarPaciente(p); }
+        
+       
         limpiarFormulario();
+    }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Datos no validos");
+    
+    }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
@@ -262,7 +272,6 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

@@ -15,7 +15,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        setLocationRelativeTo(null);
+        //setLocationRelativeTo(null);
     }
 
     /**
@@ -35,6 +35,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_paciente = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jm_dieta = new javax.swing.JMenu();
         jm_menu = new javax.swing.JMenu();
 
@@ -96,6 +97,15 @@ public class Principal extends javax.swing.JFrame {
                 jm_pacienteActionPerformed(evt);
             }
         });
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jm_paciente.add(jMenuItem2);
+
         jMenuBar1.add(jm_paciente);
 
         jm_dieta.setBackground(new java.awt.Color(0, 102, 102));
@@ -136,7 +146,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jm_pacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_pacienteActionPerformed
         // TODO add your handling code here:
-         // TODO add your handling code here:
+        
         escritorio.removeAll();
         escritorio.repaint();
         fondoMenu();
@@ -169,6 +179,16 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(mv);
         escritorio.moveToFront(mv);
     }//GEN-LAST:event_jm_menuActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+           escritorio.removeAll();
+        escritorio.repaint();
+        //fondoMenu();
+         PacienteVista pv= new PacienteVista();
+        pv.setVisible(true);
+        escritorio.add(pv);
+        escritorio.moveToFront(pv);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,6 +232,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JMenu jm_dieta;
