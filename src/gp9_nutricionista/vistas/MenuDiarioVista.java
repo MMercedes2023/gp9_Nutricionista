@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import nutricionista_persistencia.ComidaData;
+import nutricionista_persistencia.DietaData;
 import nutricionista_persistencia.MenuData;
 import nutricionista_persistencia.RenglonDeMenuData;
 
@@ -33,6 +34,7 @@ MenuData md=new MenuData();
 MenuDiario m=new MenuDiario();
 RenglonDeMenuData rm= new RenglonDeMenuData();
 ComidaData cm=new ComidaData();
+DietaData dD = new DietaData();
 Dieta d=new Dieta();
     /**
      * Creates new form MenuDiarioVista
@@ -225,23 +227,23 @@ Dieta d=new Dieta();
 
     private void TFCodMenuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFCodMenuKeyTyped
         // TODO add your handling code here:
-        try{
-        int codMenu=Integer.parseInt(TFCodMenu.getText());
-            String nrodias=jSpinner1.getValue().toString();
-        if(TFCodMenu.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Debe ingresar un Código de Menú");
-        
-        }else{
-        
-        
-        }
-        
-        }catch(NumberFormatException e){
-       JOptionPane.showMessageDialog(null,"Datos Incorrectos");
-       
-        
-        
-        }
+//        try{
+//        int codMenu=Integer.parseInt(TFCodMenu.getText());
+//            String nrodias=jSpinner1.getValue().toString();
+//        if(TFCodMenu.getText().isEmpty()){
+//            JOptionPane.showMessageDialog(null, "Debe ingresar un Código de Menú");
+//        
+//        }else{
+//        
+//        
+//        }
+//        
+//        }catch(NumberFormatException e){
+//       JOptionPane.showMessageDialog(null,"Datos Incorrectos");
+//       
+//        
+//        
+//        }
         
     }//GEN-LAST:event_TFCodMenuKeyTyped
 
@@ -259,7 +261,7 @@ Dieta d=new Dieta();
        
        m.setDiaNro(nrodias);
        m.setEstado(rb);
-       m.setDieta(d);
+       m.setDieta(dD.buscarDietaPorId(coddieta));
        md.guardarMenu(m);
        
     }//GEN-LAST:event_jBCargarActionPerformed

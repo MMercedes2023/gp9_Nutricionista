@@ -26,7 +26,7 @@ public MenuData(){
 
 }
 
-public void guardarMenu (MenuDiario menuDiario ){
+public void guardarMenu (MenuDiario menuDiario){
     String sql= "INSERT INTO menudiario(diaNro,estado,codDieta) VALUES(?,?,?)";
         try{
         PreparedStatement ps= con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -36,7 +36,7 @@ public void guardarMenu (MenuDiario menuDiario ){
         ps.executeUpdate();
         ResultSet rs=ps.getGeneratedKeys();
         if(rs.next()){
-        menuDiario.setCodMenu(rs.getInt("codMenu"));
+        menuDiario.setCodMenu(rs.getInt(1));
         JOptionPane.showMessageDialog(null," Menu guardado con éxito ");
         }
         
