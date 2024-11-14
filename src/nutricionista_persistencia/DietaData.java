@@ -74,7 +74,7 @@ String sql= "INSERT INTO dieta (nombreD,fechaInicio,fechaFin,pesoFinal,estado,to
                 dieta.setPaciente(pD.buscarPaciente(rs.getInt("nroPaciente")));
                 dieta.setEstado(true);
             }else{
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
+                JOptionPane.showMessageDialog(null, "No existe la dieta");
         
         }
             ps.close();
