@@ -38,9 +38,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jm_dieta = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jm_menu = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -121,6 +123,15 @@ public class Principal extends javax.swing.JFrame {
                 jm_dietaActionPerformed(evt);
             }
         });
+
+        jMenuItem6.setText("Gestion de dietas");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jm_dieta.add(jMenuItem6);
+
         jMenuBar1.add(jm_dieta);
 
         jm_menu.setBackground(new java.awt.Color(0, 102, 102));
@@ -146,6 +157,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jm_menu.add(jMenuItem5);
+
+        jMenuItem7.setText("Menu diario");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jm_menu.add(jMenuItem7);
 
         jMenuBar1.add(jm_menu);
 
@@ -193,14 +212,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jm_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_menuActionPerformed
         // TODO add your handling code here:
-         // TODO add your handling code here:
-        escritorio.removeAll();
-        escritorio.repaint();
-        fondoMenu();
-        MenuDiarioVista mv = new MenuDiarioVista();
-        mv.setVisible(true);
-        escritorio.add(mv);
-        escritorio.moveToFront(mv);
+         
+        
     }//GEN-LAST:event_jm_menuActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -232,6 +245,27 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(cV);
         escritorio.moveToFront(cV);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+       escritorio.removeAll();
+       escritorio.repaint();
+       fondoMenu();
+       DietaVist dV = new DietaVist();
+       escritorio.add(dV);
+       dV.setVisible(true);
+       escritorio.moveToFront(dV);
+       
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        fondoMenu();
+        MenuDiarioVista mv = new MenuDiarioVista();
+        mv.setVisible(true);
+        escritorio.add(mv);
+        escritorio.moveToFront(mv);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,6 +313,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JMenu jm_dieta;

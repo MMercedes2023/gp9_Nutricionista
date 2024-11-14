@@ -30,7 +30,7 @@ public class RenglonDeMenuData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 rdm.setNroRenglon(id);
-                rdm.setAlimento(cD.buscarComida(rs.getInt("alimento")));
+                rdm.setAlimento(cD.buscarComida(rs.getInt("codComida")));
                 rdm.setCantidadGrs(rs.getDouble("cantidadGrs"));
                 rdm.setSubtotalCalorias(rs.getInt("subtotalCalorias"));
             } else {
@@ -68,8 +68,31 @@ public class RenglonDeMenuData {
             JOptionPane.showMessageDialog(null, "Error al ingresar renglon: " + e.getMessage());
         }
     }
+    
+    
+    public void insertarRenglonId(RenglonDeMenu rdm) {
+        String sql = "INSERT INTO renglondemenu (nroRenglon,codComida, cantidadGrs, subtotalCalorias) VALUES (?, ?, ?, ?)";
+//        calcularSubtotalCalorias();
+        Comida c = rdm.getAlimento();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, rdm.getNroRenglon());
+            ps.setInt(2, c.getConComida());
+            ps.setDouble(3, rdm.getCantidadGrs());
+            ps.setInt(4, rdm.getSubtotalCalorias());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                
+                JOptionPane.showMessageDialog(null, "Renglon  añadido con éxito");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al ingresar renglon: " + e.getMessage());
+        }
+    }
 
-    public void actualizarRenglon(RenglonDeMenu rdm, int id) {
+    public void actualizarRenglonMenu(RenglonDeMenu rdm, int id) {
         String sql = "UPDATE renglondemenu SET codComida = ?, cantidadGrs = ?, subtotalCalorias = ? WHERE nroRenglon = ? AND codMenu = ?";
         Comida c = rdm.getAlimento();
 
@@ -92,19 +115,54 @@ public class RenglonDeMenuData {
             JOptionPane.showMessageDialog(null, "Error al actualizar renglón: " + e.getMessage());
         }
     }
-
-    public void eliminarRenglon(int id) {
-        String sql = "DELETE FROM RenglonDeMenu WHERE nroRenglon = ?";
+    
+    public void actualizarRenglon(RenglonDeMenu rdm) {
+        String sql = "UPDATE renglondemenu SET codComida = ?, cantidadGrs = ?, subtotalCalorias = ? WHERE nroRenglon = ?";
+        Comida c = rdm.getAlimento();
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            JOptionPane.showMessageDialog(null, "Se elimino el renglon");
+            ps.setInt(1, c.getConComida());
+            ps.setDouble(2, rdm.getCantidadGrs());
+            ps.setInt(3, rdm.getSubtotalCalorias());
+            ps.setInt(4, rdm.getNroRenglon());
+           JOptionPane.showMessageDialog(null, rdm.getNroRenglon());
 
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Se actualizó el renglón con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el renglón para actualizar.");
+            }
+            ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar el renglon: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al actualizar renglón: " + e.getMessage());
         }
     }
+
+    public void eliminarRenglon(int id) {
+    String sql = "DELETE FROM RenglonDeMenu WHERE nroRenglon = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+
+    
+        int rowsAffected = ps.executeUpdate();
+        
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Se elimino el renglón con exito.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontro el renglon para eliminar.");
+        }
+        
+        ps.close();
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al eliminar el renglon: " + e.getMessage());
+    }
+}
+
 
 //    private void calcularSubtotalCalorias() {
 //        double x = (c.getCaloriasPor100g() * rdm.getCantidadGrs()) / 100;

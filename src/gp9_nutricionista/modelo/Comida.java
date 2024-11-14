@@ -93,7 +93,13 @@ public class Comida {
     }
 
     
-    
+    @Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Comida comida = (Comida) obj;
+    return this.conComida == comida.conComida; 
+}
     
     
    
@@ -102,7 +108,7 @@ public class Comida {
     
     @Override
     public String toString() {
-        return "Comida{" + "conComida=" + conComida + ", nombre=" + nombre + ", tipoComida=" + tipoComida + ", caloriasPor100g=" + caloriasPor100g + ", detalle=" + detalle + ", baja=" + baja + '}';
+        return "id " + conComida +", " + nombre +  ", " + tipoComida + ", " + caloriasPor100g + "cal por 100 gr, " + detalle ;
     }
     
     

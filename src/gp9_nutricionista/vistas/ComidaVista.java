@@ -245,7 +245,24 @@ public class ComidaVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
-        // TODO add your handling code here:
+        Comida c = new Comida();
+        try {
+            int id = Integer.parseInt(jTid.getText());
+
+           
+
+            c.setBaja(jRadioButton1.isSelected());
+            c.setCaloriasPor100g(Integer.parseInt(jTcalorias.getText()));
+            c.setConComida(id);
+            c.setDetalle(jTdetalle.getText());
+            c.setNombre(jTnombre.getText());
+            c.setTipoComida(jTtipocomida.getText());
+            cD.modificarAlimento(c);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Los datos ingresados no son validos");
+
+        }
     }//GEN-LAST:event_jModificarActionPerformed
 
 

@@ -4,6 +4,7 @@
  */
 package gp9_nutricionista.vistas;
 
+import javax.swing.JOptionPane;
 import nutricionista_persistencia.DietaData;
 
 /**
@@ -39,7 +40,7 @@ public class DietaVist extends javax.swing.JInternalFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jtf_id2 = new javax.swing.JTextField();
+        jtf_id = new javax.swing.JTextField();
         jtf_nombre = new javax.swing.JTextField();
         jcb_menus = new javax.swing.JComboBox<>();
         jft_fechaInicio = new javax.swing.JFormattedTextField();
@@ -52,7 +53,7 @@ public class DietaVist extends javax.swing.JInternalFrame {
         jToggleButton3 = new javax.swing.JToggleButton();
         jToggleButton4 = new javax.swing.JToggleButton();
 
-        jPanel4.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel4.setBackground(new java.awt.Color(102, 204, 255));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel15.setText("DIETA");
@@ -75,10 +76,10 @@ public class DietaVist extends javax.swing.JInternalFrame {
         jLabel21.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel21.setText("Peso Final:");
 
-        jtf_id2.setBackground(new java.awt.Color(204, 204, 204));
-        jtf_id2.addActionListener(new java.awt.event.ActionListener() {
+        jtf_id.setBackground(new java.awt.Color(204, 204, 204));
+        jtf_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_id2ActionPerformed(evt);
+                jtf_idActionPerformed(evt);
             }
         });
 
@@ -143,7 +144,7 @@ public class DietaVist extends javax.swing.JInternalFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addGap(59, 59, 59)
-                                .addComponent(jtf_id2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel17)
@@ -196,7 +197,7 @@ public class DietaVist extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jLabel19)
-                    .addComponent(jtf_id2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jft_fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -241,16 +242,25 @@ public class DietaVist extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtf_id2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_id2ActionPerformed
+    private void jtf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_idActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_id2ActionPerformed
+    }//GEN-LAST:event_jtf_idActionPerformed
 
     private void jft_fechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jft_fechaInicioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jft_fechaInicioActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        try{
+        int id = Integer.parseInt(jtf_id.getText());
+        
+        diet.eliminarDieta(id);
+        }catch(Exception ex){
+        
+            JOptionPane.showMessageDialog(null, "debe ingresar un id");
+        }
+        limpiarFormulario();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
@@ -258,39 +268,20 @@ public class DietaVist extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        int id = Integer.parseInt(jtf_id.getText());
-        diet.eliminarDieta(id);
-
-        limpiarFormulario();
+        
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton jBGuardar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jTEstado;
     private javax.swing.JToggleButton jToggleButton1;
@@ -300,8 +291,6 @@ public class DietaVist extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField jft_fechaFinal;
     private javax.swing.JFormattedTextField jft_fechaInicio;
     private javax.swing.JTextField jtf_id;
-    private javax.swing.JTextField jtf_id1;
-    private javax.swing.JTextField jtf_id2;
     private javax.swing.JTextField jtf_nombre;
     private javax.swing.JTextField jtf_pesoFinal;
     // End of variables declaration//GEN-END:variables

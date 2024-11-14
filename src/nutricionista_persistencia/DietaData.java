@@ -118,21 +118,32 @@ public void modificarDieta(Dieta dieta){
     
 
 
-public void eliminarDieta(int codDieta){
+public void eliminarDieta(int codDieta) {
+    try {
+       
+        String sql = "UPDATE dieta SET estado = 0 WHERE codDieta = ?";
+        
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        
     
-try{
-String sql= "UPDATE dieta SET estado=0 WHERE codDieta=?";
-    PreparedStatement ps=con.prepareStatement(sql);
-    int fila=ps.executeUpdate();
-    if(fila==1){
-    JOptionPane.showMessageDialog(null," Su dieta se eliminó ");
-    }
-   ps.close();
-}catch (SQLException ex){
-    JOptionPane.showMessageDialog(null,"Error al acceder a  dieta "+ex.getMessage());
-    
-    
-    }
+        ps.setInt(1, codDieta);
+        
+      
+        int fila = ps.executeUpdate();
+        
+        
+        if (fila == 1) {
+            JOptionPane.showMessageDialog(null, "Su dieta se elimino");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontro la dieta");
+        }
 
+        
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a dieta: " + ex.getMessage());
+    }
 }
+
 }
