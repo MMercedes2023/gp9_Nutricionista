@@ -121,8 +121,18 @@ Dieta d=new Dieta();
         });
 
         jBModificar.setText("Modificar");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
 
         jBCerrar.setText("Cerrar");
+        jBCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCerrarActionPerformed(evt);
+            }
+        });
 
         jBBucar.setText("Buscar");
         jBBucar.addActionListener(new java.awt.event.ActionListener() {
@@ -265,6 +275,16 @@ Dieta d=new Dieta();
         int cod=Integer.parseInt(TFCodMenu.getText());
         md.buscarMenuPorId(cod);
     }//GEN-LAST:event_jBBucarActionPerformed
+
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        // TODO add your handling code here:
+        md.modificarMenu(m);
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jBCerrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
