@@ -92,6 +92,37 @@ public class ComidaData {
     
     }
     
+    
+     public void guardarComidaid(Comida comida){
+     
+        String sql = "INSERT INTO comida (codComida, nombre, tipoComida, caloriasPor100g, detalle, baja) VALUES(?,?,?,?,?,?)";
+        
+        try {
+          PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+          ps.setInt(1, comida.getConComida());
+          ps.setString(2, comida.getNombre());
+          ps.setString(3, comida.getTipoComida());
+          ps.setInt(4, comida.getCaloriasPor100g());
+          ps.setString(5, comida.getDetalle());
+          ps.setBoolean(6, comida.isBaja());
+          
+           ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                comida.setConComida(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Comida añadida con éxito");
+            }
+            ps.close();
+          
+          
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar comida");
+            
+            
+        }
+    
+    }
+    
     public ArrayList<Comida> listarComidas(){
     ArrayList<Comida> listComidas = new ArrayList<>();
     String sql = "SELECT * FROM comida";

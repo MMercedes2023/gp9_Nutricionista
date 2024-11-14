@@ -36,8 +36,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_paciente = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jm_dieta = new javax.swing.JMenu();
         jm_menu = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -98,13 +101,16 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.setText("Gestion de pacientes");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jm_paciente.add(jMenuItem2);
+
+        jMenuItem3.setText("Listado de pacientes");
+        jm_paciente.add(jMenuItem3);
 
         jMenuBar1.add(jm_paciente);
 
@@ -124,6 +130,23 @@ public class Principal extends javax.swing.JFrame {
                 jm_menuActionPerformed(evt);
             }
         });
+
+        jMenuItem4.setText("renglon menu");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jm_menu.add(jMenuItem4);
+
+        jMenuItem5.setText("Comidas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jm_menu.add(jMenuItem5);
+
         jMenuBar1.add(jm_menu);
 
         setJMenuBar(jMenuBar1);
@@ -183,12 +206,32 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
            escritorio.removeAll();
         escritorio.repaint();
-        //fondoMenu();
+        fondoMenu();
          PacienteVista pv= new PacienteVista();
         pv.setVisible(true);
         escritorio.add(pv);
         escritorio.moveToFront(pv);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       escritorio.removeAll();
+       escritorio.repaint();
+        fondoMenu();
+        RenglonDeMenuVista rdmV = new RenglonDeMenuVista();
+        rdmV.setVisible(true);
+        escritorio.add(rdmV);
+        escritorio.moveToFront(rdmV);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        escritorio.removeAll();
+       escritorio.repaint();
+        fondoMenu();
+        ComidaVista cV = new ComidaVista();
+        cV.setVisible(true);
+        escritorio.add(cV);
+        escritorio.moveToFront(cV);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,6 +276,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JMenu jm_dieta;

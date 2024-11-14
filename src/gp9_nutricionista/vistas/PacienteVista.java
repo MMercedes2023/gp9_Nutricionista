@@ -163,12 +163,27 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
         jTAltura.setBackground(new java.awt.Color(204, 204, 204));
+        jTAltura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTAlturaKeyTyped(evt);
+            }
+        });
         jPanel1.add(jTAltura, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 140, -1));
 
         jTPesoA.setBackground(new java.awt.Color(204, 204, 204));
+        jTPesoA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTPesoAKeyTyped(evt);
+            }
+        });
         jPanel1.add(jTPesoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 140, -1));
 
         jTPesoD.setBackground(new java.awt.Color(204, 204, 204));
+        jTPesoD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTPesoDKeyTyped(evt);
+            }
+        });
         jPanel1.add(jTPesoD, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,11 +205,19 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTIdKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
 
+            evt.consume();
+        }
     }//GEN-LAST:event_jTIdKeyTyped
 
     private void jTEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTEdadKeyTyped
-
+     char validar = evt.getKeyChar();
+     if(Character.isLetter(validar)){
+     evt.consume();
+     
+     }
     }//GEN-LAST:event_jTEdadKeyTyped
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
@@ -269,7 +292,14 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTEstadoActionPerformed
 
     private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
-
+    char validar = evt.getKeyChar();
+    if(Character.isDigit(validar)){
+    evt.consume();
+    
+    
+    }
+    
+    
     }//GEN-LAST:event_jTNombreKeyTyped
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
@@ -277,8 +307,60 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificar1ActionPerformed
-        // TODO add your handling code here:
+        
+        if(!jTId.getText().isEmpty()){
+        Paciente p = new Paciente();
+        int id = Integer.parseInt(jTId.getText());
+        String nombre = jTNombre.getText();
+        int e = Integer.parseInt(jTEdad.getText());
+        float a = Float.parseFloat(jTAltura.getText());
+        float pa = Float.parseFloat(jTPesoA.getText());
+        float pd = Float.parseFloat(jTPesoD.getText());
+        boolean bo = jTEstado.isSelected();
+       
+        p.setNroPaciente(id);
+        p.setNombre(nombre);
+        p.setEdad(e);
+        p.setAltura(a);
+        p.setPesoActual(pa);
+        p.setPesoBuscado(pd);
+        p.setEstado(bo);
+        
+        pacd.modificarPaciente(p);
+        }else{
+        JOptionPane.showMessageDialog(null, "Debe ingresar el id");}
+        
+        
+        
+       
     }//GEN-LAST:event_jBModificar1ActionPerformed
+
+    private void jTAlturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTAlturaKeyTyped
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+        evt.consume();
+        
+        
+        }
+    }//GEN-LAST:event_jTAlturaKeyTyped
+
+    private void jTPesoAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPesoAKeyTyped
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+        evt.consume();
+        
+        }
+    }//GEN-LAST:event_jTPesoAKeyTyped
+
+    private void jTPesoDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPesoDKeyTyped
+        char validar = evt.getKeyChar();
+        if(Character.isLetter(validar)){
+        evt.consume();
+        
+        }
+    }//GEN-LAST:event_jTPesoDKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
