@@ -51,7 +51,7 @@ public class DietaVist extends javax.swing.JInternalFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jBGuardar = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
+        jbLimpiar = new javax.swing.JToggleButton();
 
         jPanel4.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -125,10 +125,10 @@ public class DietaVist extends javax.swing.JInternalFrame {
 
         jToggleButton3.setText("Modificar");
 
-        jToggleButton4.setText("Limpiar");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                jbLimpiarActionPerformed(evt);
             }
         });
 
@@ -180,7 +180,7 @@ public class DietaVist extends javax.swing.JInternalFrame {
                                 .addGap(63, 63, 63)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTEstado)
-                                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(22, 22, 22))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(255, 255, 255)
@@ -219,7 +219,7 @@ public class DietaVist extends javax.swing.JInternalFrame {
                     .addComponent(jToggleButton1)
                     .addComponent(jBGuardar)
                     .addComponent(jToggleButton3)
-                    .addComponent(jToggleButton4))
+                    .addComponent(jbLimpiar))
                 .addGap(37, 37, 37))
         );
 
@@ -266,9 +266,9 @@ public class DietaVist extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBGuardarActionPerformed
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        limpiarFormulario();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -285,7 +285,7 @@ public class DietaVist extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jTEstado;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JToggleButton jbLimpiar;
     private javax.swing.JComboBox<String> jcb_menus;
     private javax.swing.JFormattedTextField jft_fechaFinal;
     private javax.swing.JFormattedTextField jft_fechaInicio;

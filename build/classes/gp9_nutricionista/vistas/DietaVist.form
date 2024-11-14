@@ -100,7 +100,7 @@
                                   <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jTEstado" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jToggleButton4" min="-2" pref="73" max="-2" attributes="0"/>
+                                      <Component id="jbLimpiar" min="-2" pref="73" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
@@ -151,7 +151,7 @@
                       <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jToggleButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jToggleButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
@@ -322,12 +322,12 @@
             <Property name="text" type="java.lang.String" value="Modificar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton4">
+        <Component class="javax.swing.JToggleButton" name="jbLimpiar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLimpiarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
