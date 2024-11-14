@@ -5,12 +5,15 @@
  */
 package gp9_nutricionista.vistas;
 
+import gp9_nutricionista.modelo.Dieta;
 import gp9_nutricionista.modelo.MenuDiario;
 import gp9_nutricionista.modelo.RenglonDeMenu;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import nutricionista_persistencia.ComidaData;
 import nutricionista_persistencia.MenuData;
+import nutricionista_persistencia.RenglonDeMenuData;
 
 /**
  *
@@ -28,6 +31,9 @@ private DefaultTableModel modelo=new DefaultTableModel(){
 };
 MenuData md=new MenuData();
 MenuDiario m=new MenuDiario();
+RenglonDeMenuData rm= new RenglonDeMenuData();
+ComidaData cm=new ComidaData();
+Dieta d=new Dieta();
     /**
      * Creates new form MenuDiarioVista
      */
@@ -45,37 +51,41 @@ MenuDiario m=new MenuDiario();
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        TfCodMenu = new javax.swing.JTextField();
+        TFCodMenu = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jRBActivo = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TMenu = new javax.swing.JTable();
+        TbMenu = new javax.swing.JTable();
+        jBCargar = new javax.swing.JButton();
+        jBModificar = new javax.swing.JButton();
+        jBCerrar = new javax.swing.JButton();
+        jBBucar = new javax.swing.JButton();
+        jTcoddieta = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setIconifiable(true);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jLabel1, org.jdesktop.beansbinding.ELProperty.create(""), this, org.jdesktop.beansbinding.BeanProperty.create("background"));
-        bindingGroup.addBinding(binding);
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gp9_nutricionista/vistas/Recursos.jpeg"))); // NOI18N
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jLabel1, org.jdesktop.beansbinding.ELProperty.create("${icon}"), jLabel1, org.jdesktop.beansbinding.BeanProperty.create("background"));
-        bindingGroup.addBinding(binding);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("MENU DIARIO");
 
         jLabel3.setText("Codigo de Menú: ");
 
-        TfCodMenu.addKeyListener(new java.awt.event.KeyAdapter() {
+        TFCodMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFCodMenuActionPerformed(evt);
+            }
+        });
+        TFCodMenu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                TfCodMenuKeyTyped(evt);
+                TFCodMenuKeyTyped(evt);
             }
         });
 
@@ -83,9 +93,14 @@ MenuDiario m=new MenuDiario();
 
         jLabel5.setText("Estado :");
 
-        jRadioButton1.setText("Activo");
+        jRBActivo.setText("Activo");
+        jRBActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBActivoActionPerformed(evt);
+            }
+        });
 
-        TMenu.setModel(new javax.swing.table.DefaultTableModel(
+        TbMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -96,7 +111,27 @@ MenuDiario m=new MenuDiario();
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(TMenu);
+        jScrollPane1.setViewportView(TbMenu);
+
+        jBCargar.setText("Cargar");
+        jBCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCargarActionPerformed(evt);
+            }
+        });
+
+        jBModificar.setText("Modificar");
+
+        jBCerrar.setText("Cerrar");
+
+        jBBucar.setText("Buscar");
+        jBBucar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBucarActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Código de Dieta:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,22 +144,34 @@ MenuDiario m=new MenuDiario();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jRBActivo)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfCodMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TFCodMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(jTcoddieta))
                 .addGap(150, 150, 150))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(82, 82, 82)
+                        .addComponent(jBBucar)
+                        .addGap(85, 85, 85)
+                        .addComponent(jBCargar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBModificar)
+                        .addGap(73, 73, 73)
+                        .addComponent(jBCerrar)))
+                .addGap(49, 49, 49))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +183,7 @@ MenuDiario m=new MenuDiario();
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(TfCodMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TFCodMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -144,27 +191,34 @@ MenuDiario m=new MenuDiario();
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jRadioButton1)))
+                            .addComponent(jRBActivo))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTcoddieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBCargar)
+                    .addComponent(jBModificar)
+                    .addComponent(jBCerrar)
+                    .addComponent(jBBucar))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
-
-        jLabel1.getAccessibleContext().setAccessibleParent(jLabel1);
-
-        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TfCodMenuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfCodMenuKeyTyped
+    private void TFCodMenuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFCodMenuKeyTyped
         // TODO add your handling code here:
         try{
-        int codMenu=Integer.parseInt(TfCodMenu.getText());
-        if(TfCodMenu.getText().isEmpty()){
+        int codMenu=Integer.parseInt(TFCodMenu.getText());
+            String nrodias=jSpinner1.getValue().toString();
+        if(TFCodMenu.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Debe ingresar un Código de Menú");
         
         }else{
@@ -179,49 +233,90 @@ MenuDiario m=new MenuDiario();
         
         }
         
-    }//GEN-LAST:event_TfCodMenuKeyTyped
+    }//GEN-LAST:event_TFCodMenuKeyTyped
+
+    private void TFCodMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFCodMenuActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_TFCodMenuActionPerformed
+
+    private void jBCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarActionPerformed
+        // TODO add your handling code here:
+       int cod=Integer.parseInt(TFCodMenu.getText());
+       int nrodias=Integer.parseInt(jSpinner1.getValue().toString());
+       boolean rb=jRBActivo.isEnabled();
+       int coddieta=Integer.parseInt(jTcoddieta.getText());
+       
+       m.setDiaNro(nrodias);
+       m.setEstado(rb);
+       m.setDieta(d);
+       md.guardarMenu(m);
+       
+    }//GEN-LAST:event_jBCargarActionPerformed
+
+    private void jRBActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBActivoActionPerformed
+        // TODO add your handling code here:
+        jRBActivo.setEnabled(true);
+        
+    }//GEN-LAST:event_jRBActivoActionPerformed
+
+    private void jBBucarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBucarActionPerformed
+        // TODO add your handling code here:
+        int cod=Integer.parseInt(TFCodMenu.getText());
+        md.buscarMenuPorId(cod);
+    }//GEN-LAST:event_jBBucarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TMenu;
-    private javax.swing.JTextField TfCodMenu;
+    private javax.swing.JTextField TFCodMenu;
+    private javax.swing.JTable TbMenu;
+    private javax.swing.JButton jBBucar;
+    private javax.swing.JButton jBCargar;
+    private javax.swing.JButton jBCerrar;
+    private javax.swing.JButton jBModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton jRBActivo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    private javax.swing.JTextField jTcoddieta;
     // End of variables declaration//GEN-END:variables
 
     private void crearCabecera() {
-        modelo.addColumn("Dia Numero");
+        modelo.addColumn("Codigo de Dieta");
+        modelo.addColumn("Día Número");
+        modelo.addColumn("Estado");
         modelo.addColumn("Dieta");
-        modelo.addColumn("Tipo");
-        modelo.addColumn("Comida");
-        modelo.addColumn("Ingredientes");
-        TMenu.setModel(modelo);
+        
+        TbMenu.setModel(modelo);
     }
+    
      private void limpiarTabla() {
-        int f = TMenu.getRowCount() - 1;
+        int f = TbMenu.getRowCount() - 1;
 
         for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
     }
-         private void cargarTabla(boolean activos) {
+         private void cargarTabla() {
         limpiarTabla();
+       
+ 
+      TbMenu.setModel(modelo);
 
-        List<MenuDiario> menu;
-        if (activos) {
-            menu = md.listarMenu();
-        
+        for (MenuDiario m : md.listarMenu()) {
+            Object[] row = new Object[4];
+            row[0] = m.getCodMenu();
+            row[1] = m.getDiaNro();  // Si `getAlimento()` devuelve un objeto, es posible que quieras modificar su toString()
+            row[2] = m.isEstado();
+            row[3] = m.getDieta();
 
-        for (MenuDiario m: menu) {
-            modelo.addRow(new Object[]{m.getDiaNro(), m.getDieta().getCodDieta(),m.getComidas(),m.getComidas()});
+            modelo.addRow(row);     
         }
     }
 
-}}
+}

@@ -1,5 +1,6 @@
 package gp9_nutricionista;
 
+
 import gp9_nutricionista.modelo.*;
 import java.time.LocalDate;
 import java.time.Month;
@@ -14,7 +15,8 @@ public class Gp9_Nutricionista {
     public static void main(String[] args) {
        
         // TODO code application logic here
-       PacienteData pD = new PacienteData();
+
+   /*    PacienteData pD = new PacienteData();
        DietaData dD = new DietaData();
        Paciente p1 = new Paciente("Fernando", 33, 180, 120, 85);
        Paciente P2 = new Paciente(1, "Jose", 25, 170, 70, 68);
@@ -37,12 +39,12 @@ public class Gp9_Nutricionista {
        
        rdmD.insertarRenglon(r2);
        
-       //cD.guardarComida(c1);
+       //cD.guardarComida(c1);*/
 //         for (Comida listarComida :  cD.listarComidas()) {
 //             System.out.println(listarComida);
 //        }
         
-         System.out.println(cD.buscarComida(1));
+         //System.out.println(cD.buscarComida(1));
          
          //cD.borrarComida(2);
        //cD.modificarAlimento(c1);
@@ -57,13 +59,13 @@ public class Gp9_Nutricionista {
        
        //dD.guardarDieta(dieta1);
        //dD.modificarDieta(dieta1);
-        System.out.println(dD.buscarDietaPorId(1));
+        //System.out.println(dD.buscarDietaPorId(1));
        
        
        
        
        
        
-    }
-    
+    //}
+}    
 }
