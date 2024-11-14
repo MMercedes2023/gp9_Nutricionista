@@ -4,10 +4,10 @@
  */
 package gp9_nutricionista.vistas;
 
-
 import gp9_nutricionista.modelo.*;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import nutricionista_persistencia.ComidaData;
 import nutricionista_persistencia.RenglonDeMenuData;
 
@@ -16,14 +16,17 @@ import nutricionista_persistencia.RenglonDeMenuData;
  * @author agust
  */
 public class RenglonDeMenuVista extends javax.swing.JInternalFrame {
-      private RenglonDeMenuData rdmD = new RenglonDeMenuData();
-      private ComidaData cD = new ComidaData();
+
+    private RenglonDeMenuData rdmD = new RenglonDeMenuData();
+    private ComidaData cD = new ComidaData();
+
     /**
      * Creates new form RenglonDeMenuVista
      */
     public RenglonDeMenuVista() {
         initComponents();
         cargarCombo();
+        llenarTabla();
     }
 
     /**
@@ -201,91 +204,80 @@ public class RenglonDeMenuVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
-         RenglonDeMenu rdm = new RenglonDeMenu();
-        
-           try{
-        
-         
-        
-       rdm.setAlimento((Comida) jComboBox1.getSelectedItem());
-       rdm.setCantidadGrs(Double.parseDouble(jTgrasa.getText()));
-       rdm.setSubtotalCalorias(Integer.parseInt(jTcalorias.getText()));
-          if(!jTid.getText().isEmpty()){
-              rdm.setNroRenglon(Integer.parseInt(jTid.getText()));
-           rdmD.actualizarRenglon(rdm);
-          }
-        
-        
-        }catch(Exception ex){
-        
-        JOptionPane.showMessageDialog(null, "Datos no validos" );
-        
+        RenglonDeMenu rdm = new RenglonDeMenu();
+
+        try {
+
+            rdm.setAlimento((Comida) jComboBox1.getSelectedItem());
+            rdm.setCantidadGrs(Double.parseDouble(jTgrasa.getText()));
+            rdm.setSubtotalCalorias(Integer.parseInt(jTcalorias.getText()));
+            if (!jTid.getText().isEmpty()) {
+                rdm.setNroRenglon(Integer.parseInt(jTid.getText()));
+                rdmD.actualizarRenglon(rdm);
+            }
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, "Datos no validos");
+
         }
-        
+        llenarTabla();
     }//GEN-LAST:event_jModificarActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-         try{
-         int id = Integer.parseInt(jTid.getText());
-        RenglonDeMenu rdm = new RenglonDeMenu();
-         rdm = rdmD.buscarRenglon(id);
-        
-        jTcalorias.setText(rdm.getSubtotalCalorias()+"");
-        jTgrasa.setText(rdm.getCantidadGrs()+"");
-        jComboBox1.setSelectedItem(rdm.getAlimento());
-        
-        
-        
-       
-        
-    }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Debe ingresar un id para poder buscar");
-     
-    }
+        try {
+            int id = Integer.parseInt(jTid.getText());
+            RenglonDeMenu rdm = new RenglonDeMenu();
+            rdm = rdmD.buscarRenglon(id);
 
+            jTcalorias.setText(rdm.getSubtotalCalorias() + "");
+            jTgrasa.setText(rdm.getCantidadGrs() + "");
+            jComboBox1.setSelectedItem(rdm.getAlimento());
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un id para poder buscar");
+
+        }
+        llenarTabla();
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
         RenglonDeMenu rdm = new RenglonDeMenu();
-        
-           try{
-        
-         
-        
-       rdm.setAlimento((Comida) jComboBox1.getSelectedItem());
-       rdm.setCantidadGrs(Double.parseDouble(jTgrasa.getText()));
-       rdm.setSubtotalCalorias(Integer.parseInt(jTcalorias.getText()));
-          if(!jTid.getText().isEmpty()){
-           rdmD.insertarRenglonId(rdm);
-          }else{
-          rdmD.insertarRenglon(rdm);
-          
-          }
-       
-        
-        
-        }catch(Exception ex){
-        
-        JOptionPane.showMessageDialog(null, "error" + ex);
-        
+
+        try {
+
+            rdm.setAlimento((Comida) jComboBox1.getSelectedItem());
+            rdm.setCantidadGrs(Double.parseDouble(jTgrasa.getText()));
+            rdm.setSubtotalCalorias(Integer.parseInt(jTcalorias.getText()));
+            if (!jTid.getText().isEmpty()) {
+                rdmD.insertarRenglonId(rdm);
+            } else {
+                rdmD.insertarRenglon(rdm);
+
+            }
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, "error" + ex);
+
         }
-        
-        
-        
+
+        llenarTabla();
+
     }//GEN-LAST:event_jAgregarActionPerformed
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
-        try{
-        
-        int id = Integer.parseInt(jTid.getText());
-        rdmD.eliminarRenglon(id);
-        
-        
-        }catch(Exception ex){
-        
-        JOptionPane.showMessageDialog(null, "Debe ingresar un id");
-        
+        try {
+
+            int id = Integer.parseInt(jTid.getText());
+            rdmD.eliminarRenglon(id);
+
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, "Debe ingresar un id");
+
         }
+        llenarTabla();
     }//GEN-LAST:event_jEliminarActionPerformed
 
 
@@ -315,6 +307,30 @@ private void cargarCombo() {
         }
     }
 
+    private void llenarTabla() {
 
+        String[] columnNames = {"Nro Renglon", "Alimento", "Cantidad Grs", "Subtotal Calorias"};
+
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        jTable1.setModel(model);
+
+        for (RenglonDeMenu rdm : rdmD.listarRenglones()) {
+            Object[] row = new Object[4];
+            row[0] = rdm.getNroRenglon();
+            row[1] = rdm.getAlimento().getNombre();  // Si `getAlimento()` devuelve un objeto, es posible que quieras modificar su toString()
+            row[2] = rdm.getCantidadGrs();
+            row[3] = rdm.getSubtotalCalorias();
+
+            model.addRow(row);
+        }
+    }
+private void limpiarTabla() {
+   
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    
+   
+    model.setRowCount(0);
+}
 
 }

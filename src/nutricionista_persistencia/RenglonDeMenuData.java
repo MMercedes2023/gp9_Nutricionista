@@ -7,6 +7,7 @@ package nutricionista_persistencia;
 import java.sql.*;
 import gp9_nutricionista.modelo.Comida;
 import gp9_nutricionista.modelo.RenglonDeMenu;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class RenglonDeMenuData {
@@ -68,8 +69,7 @@ public class RenglonDeMenuData {
             JOptionPane.showMessageDialog(null, "Error al ingresar renglon: " + e.getMessage());
         }
     }
-    
-    
+
     public void insertarRenglonId(RenglonDeMenu rdm) {
         String sql = "INSERT INTO renglondemenu (nroRenglon,codComida, cantidadGrs, subtotalCalorias) VALUES (?, ?, ?, ?)";
 //        calcularSubtotalCalorias();
@@ -83,7 +83,7 @@ public class RenglonDeMenuData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                
+
                 JOptionPane.showMessageDialog(null, "Renglon  añadido con éxito");
             }
             ps.close();
@@ -115,7 +115,7 @@ public class RenglonDeMenuData {
             JOptionPane.showMessageDialog(null, "Error al actualizar renglón: " + e.getMessage());
         }
     }
-    
+
     public void actualizarRenglon(RenglonDeMenu rdm) {
         String sql = "UPDATE renglondemenu SET codComida = ?, cantidadGrs = ?, subtotalCalorias = ? WHERE nroRenglon = ?";
         Comida c = rdm.getAlimento();
@@ -126,7 +126,7 @@ public class RenglonDeMenuData {
             ps.setDouble(2, rdm.getCantidadGrs());
             ps.setInt(3, rdm.getSubtotalCalorias());
             ps.setInt(4, rdm.getNroRenglon());
-           JOptionPane.showMessageDialog(null, rdm.getNroRenglon());
+            JOptionPane.showMessageDialog(null, rdm.getNroRenglon());
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
@@ -141,28 +141,52 @@ public class RenglonDeMenuData {
     }
 
     public void eliminarRenglon(int id) {
-    String sql = "DELETE FROM RenglonDeMenu WHERE nroRenglon = ?";
+        String sql = "DELETE FROM RenglonDeMenu WHERE nroRenglon = ?";
 
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
 
-    
-        int rowsAffected = ps.executeUpdate();
-        
-        if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Se elimino el renglón con exito.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontro el renglon para eliminar.");
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Se elimino el renglón con exito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro el renglon para eliminar.");
+            }
+
+            ps.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el renglon: " + e.getMessage());
         }
-        
-        ps.close();
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al eliminar el renglon: " + e.getMessage());
     }
-}
 
+    public ArrayList<RenglonDeMenu> listarRenglones() {
+        ArrayList<RenglonDeMenu> renglones = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM renglondemenu";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                RenglonDeMenu rdm = new RenglonDeMenu();
+                
+                rdm.setAlimento(cD.buscarComida(rs.getInt("codComida")));
+                rdm.setCantidadGrs(rs.getDouble("cantidadGrs"));
+                rdm.setNroRenglon(rs.getInt("nroRenglon"));
+                rdm.setSubtotalCalorias(rs.getInt("subtotalCalorias"));
+                
+                renglones.add(rdm);
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "error al mostrar la lista");
+        }
+     return renglones;
+    }
 
 //    private void calcularSubtotalCalorias() {
 //        double x = (c.getCaloriasPor100g() * rdm.getCantidadGrs()) / 100;
