@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3307
--- Tiempo de generación: 23-10-2024 a las 00:24:39
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 14-11-2024 a las 21:18:53
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `nutricionista`
+-- Base de datos: `gp9_nutricionista`
 --
 
 -- --------------------------------------------------------
@@ -49,7 +49,8 @@ CREATE TABLE `dieta` (
   `fechaFin` date NOT NULL,
   `pesoFinal` float NOT NULL,
   `estado` tinyint(1) NOT NULL,
-  `totalCalorias` int(11) NOT NULL
+  `totalCalorias` int(11) NOT NULL,
+  `nroPaciente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -61,7 +62,8 @@ CREATE TABLE `dieta` (
 CREATE TABLE `menudiario` (
   `codMenu` int(11) NOT NULL,
   `diaNro` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL
+  `estado` tinyint(1) NOT NULL,
+  `codDieta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -76,7 +78,8 @@ CREATE TABLE `paciente` (
   `edad` int(11) NOT NULL,
   `altura` float NOT NULL,
   `pesoActual` float NOT NULL,
-  `pesoBuscado` float NOT NULL
+  `pesoBuscado` float NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -87,6 +90,8 @@ CREATE TABLE `paciente` (
 
 CREATE TABLE `renglondemenu` (
   `nroRenglon` int(11) NOT NULL,
+  `codComida` int(11) NOT NULL,
+  `codMenu` int(11) DEFAULT NULL,
   `cantidadGrs` double NOT NULL,
   `subtotalCalorias` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -105,19 +110,29 @@ ALTER TABLE `comida`
 -- Indices de la tabla `dieta`
 --
 ALTER TABLE `dieta`
-  ADD PRIMARY KEY (`codDieta`);
+  ADD PRIMARY KEY (`codDieta`),
+  ADD KEY `nroPaciente` (`nroPaciente`);
 
 --
 -- Indices de la tabla `menudiario`
 --
 ALTER TABLE `menudiario`
-  ADD PRIMARY KEY (`codMenu`);
+  ADD PRIMARY KEY (`codMenu`),
+  ADD KEY `codDieta` (`codDieta`);
 
 --
 -- Indices de la tabla `paciente`
 --
 ALTER TABLE `paciente`
   ADD PRIMARY KEY (`nroPaciente`);
+
+--
+-- Indices de la tabla `renglondemenu`
+--
+ALTER TABLE `renglondemenu`
+  ADD PRIMARY KEY (`nroRenglon`),
+  ADD KEY `codComida` (`codComida`),
+  ADD KEY `codMenu` (`codMenu`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -146,6 +161,35 @@ ALTER TABLE `menudiario`
 --
 ALTER TABLE `paciente`
   MODIFY `nroPaciente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `renglondemenu`
+--
+ALTER TABLE `renglondemenu`
+  MODIFY `nroRenglon` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `dieta`
+--
+ALTER TABLE `dieta`
+  ADD CONSTRAINT `dieta_ibfk_1` FOREIGN KEY (`nroPaciente`) REFERENCES `paciente` (`nroPaciente`);
+
+--
+-- Filtros para la tabla `menudiario`
+--
+ALTER TABLE `menudiario`
+  ADD CONSTRAINT `menudiario_ibfk_1` FOREIGN KEY (`codDieta`) REFERENCES `dieta` (`codDieta`);
+
+--
+-- Filtros para la tabla `renglondemenu`
+--
+ALTER TABLE `renglondemenu`
+  ADD CONSTRAINT `renglondemenu_ibfk_1` FOREIGN KEY (`codComida`) REFERENCES `comida` (`codComida`),
+  ADD CONSTRAINT `renglondemenu_ibfk_2` FOREIGN KEY (`codMenu`) REFERENCES `menudiario` (`codMenu`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
