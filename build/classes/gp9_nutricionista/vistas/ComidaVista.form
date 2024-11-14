@@ -202,12 +202,25 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTid">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTidKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTnombre">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTnombreKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTtipocomida">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTtipocomidaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTcalorias">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTcaloriasActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTcaloriasKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTdetalle">
         </Component>

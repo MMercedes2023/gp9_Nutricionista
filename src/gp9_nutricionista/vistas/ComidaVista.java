@@ -79,6 +79,35 @@ public class ComidaVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jTid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTidKeyTyped(evt);
+            }
+        });
+
+        jTnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTnombreKeyTyped(evt);
+            }
+        });
+
+        jTtipocomida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTtipocomidaKeyTyped(evt);
+            }
+        });
+
+        jTcalorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTcaloriasActionPerformed(evt);
+            }
+        });
+        jTcalorias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTcaloriasKeyTyped(evt);
+            }
+        });
+
         jModificar.setText("Modificar");
         jModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,6 +293,42 @@ public class ComidaVista extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jModificarActionPerformed
+
+    private void jTidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidKeyTyped
+       char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTidKeyTyped
+
+    private void jTcaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcaloriasActionPerformed
+       
+    }//GEN-LAST:event_jTcaloriasActionPerformed
+
+    private void jTcaloriasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTcaloriasKeyTyped
+       char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTcaloriasKeyTyped
+
+    private void jTnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnombreKeyTyped
+        char validar = evt.getKeyChar();
+        if (!Character.isLetter(validar)) {
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTnombreKeyTyped
+
+    private void jTtipocomidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTtipocomidaKeyTyped
+        char validar = evt.getKeyChar();
+        if (!Character.isLetter(validar)) {
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTtipocomidaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

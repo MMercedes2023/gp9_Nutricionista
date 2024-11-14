@@ -79,6 +79,24 @@ public class RenglonDeMenuVista extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Subtotal calorias");
 
+        jTid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTidKeyTyped(evt);
+            }
+        });
+
+        jTgrasa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTgrasaKeyTyped(evt);
+            }
+        });
+
+        jTcalorias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTcaloriasKeyTyped(evt);
+            }
+        });
+
         jAgregar.setText("Agregar");
         jAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,6 +297,30 @@ public class RenglonDeMenuVista extends javax.swing.JInternalFrame {
         }
         llenarTabla();
     }//GEN-LAST:event_jEliminarActionPerformed
+
+    private void jTidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTidKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTidKeyTyped
+
+    private void jTgrasaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTgrasaKeyTyped
+       char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTgrasaKeyTyped
+
+    private void jTcaloriasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTcaloriasKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTcaloriasKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
